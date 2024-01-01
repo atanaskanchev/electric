@@ -165,7 +165,7 @@ test('useLiveQuery re-runs query when data changes', async (t) => {
     const qtn = new QualifiedTablename('main', 'bars')
     const changes = [{ qualifiedTablename: qtn }]
 
-    notifier.actuallyChanged('test.db', changes)
+    notifier.actuallyChanged('test.db', changes, 'local')
   })
 
   await waitFor(() => assert(result.current.updatedAt! > updatedAt!), {
@@ -199,7 +199,7 @@ test('useLiveQuery re-runs query when *aliased* data changes', async (t) => {
     const qtn = new QualifiedTablename('main', 'bars')
     const changes = [{ qualifiedTablename: qtn }]
 
-    notifier.actuallyChanged('baz.db', changes)
+    notifier.actuallyChanged('baz.db', changes, 'local')
   })
 
   await waitFor(() => assert(result.current.updatedAt! > updatedAt!), {
@@ -257,7 +257,7 @@ test('useLiveQuery unsubscribes to data changes when unmounted', async (t) => {
     const qtn = new QualifiedTablename('main', 'bars')
     const changes = [{ qualifiedTablename: qtn }]
 
-    notifier.actuallyChanged('test.db', changes)
+    notifier.actuallyChanged('test.db', changes, 'local')
   })
 
   await sleepAsync(1000)
@@ -295,7 +295,7 @@ test('useLiveQuery ignores results if unmounted whilst re-querying', async (t) =
     const qtn = new QualifiedTablename('main', 'bars')
     const changes = [{ qualifiedTablename: qtn }]
 
-    notifier.actuallyChanged('test.db', changes)
+    notifier.actuallyChanged('test.db', changes, 'local')
     unmount()
   })
 
