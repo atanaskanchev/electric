@@ -49,6 +49,7 @@ import {
 } from '../../src/satellite/shapes/types'
 import { mergeEntries } from '../../src/satellite/merge'
 import { AuthState, insecureAuthToken } from '../../src/auth'
+import { ConnectivityStateChangeNotification } from '../../src/notifiers'
 
 const parentRecord = {
   id: 1,
@@ -1246,7 +1247,7 @@ test('handling connectivity state change stops queueing operations', async (t) =
   const sentLsn = satellite.client.getLastSentLsn()
   t.deepEqual(sentLsn, numberToBytes(1))
 
-  await satellite._handleConnectivityStateChange('disconnected')
+  await satellite._handleConnectivityStateChange({ status: 'disconnected' })
 
   adapter.run({
     sql: `INSERT INTO parent(id, value, other) VALUES (2, 'local', 1)`,
@@ -1259,14 +1260,15 @@ test('handling connectivity state change stops queueing operations', async (t) =
   t.deepEqual(lsn1, sentLsn)
 
   // Once connectivity is restored, we will immediately run a snapshot to send pending rows
-  await satellite._handleConnectivityStateChange('available')
+  await satellite._handleConnectivityStateChange({ status: 'available' })
   await sleepAsync(200) // Wait for snapshot to run
   const lsn2 = satellite.client.getLastSentLsn()
   t.deepEqual(lsn2, numberToBytes(2))
 })
 
 test('notifies about JWT expiration', async (t) => {
-  const { satellite, authState, runMigrations, client } = t.context
+  const { satellite, authState, runMigrations, client, notifier, dbName } =
+    t.context
   await runMigrations()
   await satellite.start(authState)
 
@@ -1275,10 +1277,15 @@ test('notifies about JWT expiration', async (t) => {
   await sleepAsync(100)
 
   // we're expecting 2 assertions
-  t.plan(1)
+  t.plan(4)
 
-  // TODO: check that user can get notified of JWT expiration
-  //       once we decided how that notification should look like
+  notifier.subscribeToConnectivityStateChanges(
+    (notification: ConnectivityStateChangeNotification) => {
+      t.is(notification.dbName, dbName)
+      t.is(notification.connectivityState.status, 'disconnected')
+      t.is(notification.connectivityState.error, 'JWT expired')
+    }
+  )
 
   // mock JWT expiration
   client.emitSocketClosedError(SatelliteErrorCode.AUTH_EXPIRED)
