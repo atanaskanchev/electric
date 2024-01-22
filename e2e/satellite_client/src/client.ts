@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { schema, Electric } from './generated/client'
 export { JsonNull } from './generated/client'
 import { globalRegistry } from 'electric-sql/satellite'
-import { AuthStatus } from 'electric-sql/auth'
 import { SatelliteErrorCode } from 'electric-sql/util'
 
 setLogLevel('DEBUG')
