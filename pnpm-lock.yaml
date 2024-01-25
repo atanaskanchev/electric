@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -141,6 +141,9 @@ importers:
       '@ikscodes/browser-env':
         specifier: ^1.0.0
         version: 1.0.0
+      '@tauri-apps/plugin-sql':
+        specifier: 2.0.0-alpha.5
+        version: 2.0.0-alpha.5
       '@testing-library/react':
         specifier: ^13.4.0
         version: 13.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -269,7 +272,7 @@ importers:
         version: 5.3.3
       wa-sqlite:
         specifier: rhashimoto/wa-sqlite#semver:^0.9.8
-        version: github.com/rhashimoto/wa-sqlite/5266fd8cdb4b3ced41352ba7b1f0e919ac37027a
+        version: github.com/rhashimoto/wa-sqlite/390744d41c61aa0bbd53d3c738abef5e23f71cc4
       web-worker:
         specifier: ^1.2.0
         version: 1.2.0
@@ -4108,6 +4111,17 @@ packages:
     engines: {node: '>=14.16'}
     dependencies:
       defer-to-connect: 2.0.1
+    dev: true
+
+  /@tauri-apps/api@2.0.0-alpha.13:
+    resolution: {integrity: sha512-sGgCkFahF3OZAHoGN5Ozt9WK7wJlbVZSgWpPQKNag4nSOX1+Py6VDRTEWriiJHDiV+gg31CWHnNXRy6TFoZmdA==}
+    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: true
+
+  /@tauri-apps/plugin-sql@2.0.0-alpha.5:
+    resolution: {integrity: sha512-u4rJZM357zWP+WmE/W1t1iu0/INQ9uqO8+dOFWzLSGqg2zgYcohTeV66hZoeCTRTzsV3qrKI3suWueLu1YKT7A==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-alpha.13
     dev: true
 
   /@testing-library/dom@8.20.0:
@@ -15394,8 +15408,8 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  github.com/rhashimoto/wa-sqlite/5266fd8cdb4b3ced41352ba7b1f0e919ac37027a:
-    resolution: {tarball: https://codeload.github.com/rhashimoto/wa-sqlite/tar.gz/5266fd8cdb4b3ced41352ba7b1f0e919ac37027a}
+  github.com/rhashimoto/wa-sqlite/390744d41c61aa0bbd53d3c738abef5e23f71cc4:
+    resolution: {tarball: https://codeload.github.com/rhashimoto/wa-sqlite/tar.gz/390744d41c61aa0bbd53d3c738abef5e23f71cc4}
     name: wa-sqlite
-    version: 0.9.9
+    version: 0.9.11
     dev: true
