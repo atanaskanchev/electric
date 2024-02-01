@@ -108,6 +108,9 @@
       "auth": [
         "./dist/auth/index.d.ts"
       ],
+      "auth/secure": [
+        "./dist/auth/secure/index.d.ts"
+      ],
       "satellite": [
         "./dist/satellite/index.d.ts"
       ],
