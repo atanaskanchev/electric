@@ -317,7 +317,7 @@ test('load migration from meta data', async (t) => {
   )
   const electric = await electrify(
     db,
-    new DbSchema({}, [migration]),
+    new DbSchema({}, [migration], []),
     {
       auth: {
         token: 'test-token',
