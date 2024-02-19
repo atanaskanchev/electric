@@ -1,5 +1,12 @@
 # electric-sql
 
+## 0.9.3
+
+### Patch Changes
+
+- 223319ea: Add expo-sqlite/next driver to client
+- 4d193eb1: Make `--debug` flag in CLI `generate` command always retain temporary migrations folders
+
 ## 0.9.2
 
 ### Patch Changes
